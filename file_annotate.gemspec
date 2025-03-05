@@ -19,9 +19,11 @@ Gem::Specification.new do |spec|
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/jedivuly/file_annotate"
   spec.metadata["changelog_uri"] = "https://github.com/jedivuly/file_annotate/blob/main/CHANGELOG.md"
+  spec.metadata['rubocop_extension'] = 'true'
 
-  spec.add_dependency "rubocop", "~> 1.0"
+  spec.add_dependency "rubocop", "~> 1.60"
   spec.add_dependency "thor", "~> 1.0"
+  spec.add_development_dependency 'rubocop', '~> 1.60'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

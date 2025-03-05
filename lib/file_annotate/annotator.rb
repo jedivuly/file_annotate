@@ -29,25 +29,16 @@ module FileAnnotate
     end
 
     def self.annotated?(lines, file)
-      lines.any? { |line| line.strip == annotation_text(file) }
+      lines.first&.strip == annotation_text(file)
     end
 
     def self.insert_annotation!(lines, file)
-      comment = "#{annotation_text(file)}\n"
-      if lines.first&.strip == "# frozen_string_literal: true"
-        lines.insert(1, comment)
-      else
-        lines.unshift(comment)
-      end
+      lines.unshift("#{annotation_text(file)}\n")
     end
 
     def self.remove_annotation!(lines, file)
-      comment = annotation_text(file)
-      if lines[0]&.strip == comment
+      if annotated?(lines, file)
         lines.delete_at(0)
-        true
-      elsif lines[1]&.strip == comment
-        lines.delete_at(1)
         true
       else
         false

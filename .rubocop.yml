@@ -1,5 +1,6 @@
 AllCops:
   TargetRubyVersion: 3.0
+  SuggestExtensions: false
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -10,8 +11,12 @@ Style/StringLiteralsInInterpolation:
 Style/AsciiComments:
   Enabled: false
 
+Metrics/BlockLength:
+  Enabled: false
+
 require:
-  - file_annotate/rubocop
+  - ./lib/rubocop/cop/file_annotate/first_line_comment.rb
 
 FileAnnotate/FirstLineComment:
   Enabled: true
+  EnforcedStyle: forbidden # default is 'required', can be 'forbidden'

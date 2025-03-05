@@ -42,6 +42,7 @@ require:
 
 FileAnnotate/FirstLineComment:
   Enabled: true
+  EnforcedStyle: forbidden # default is 'required', can be 'forbidden'
 ```
 
 然後執行 RuboCop：
@@ -53,6 +54,7 @@ rubocop
 ```bash
 rubocop -A
 ```
+( 設為forbidden時，則刪除註解 )
 
 ## Contributing
 
