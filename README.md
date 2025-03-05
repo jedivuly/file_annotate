@@ -1,34 +1,58 @@
-# FileAnnotate
+# FileAnnotate 檔案路徑註解套件
 
-TODO: Delete this and the text below, and describe your gem
+FileAnnotate 是一個 Ruby Gem，提供兩大功能：
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/file_annotate`. To experiment with that code, run `bin/console` for an interactive prompt.
+CLI 批次處理：自動在專案內每個 .rb 檔案的第一行插入該檔案路徑的註解。
 
-## Installation
+RuboCop 插件：提供自訂 Cop，檢查並確保 .rb 檔案第一行為正確的檔案路徑註解，並支援自動修正。
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+## Installation 安裝方式
 
-Install the gem and add to the application's Gemfile by executing:
-
+在專案的 Gemfile 中加入：
+```ruby
+gem "file_annotate"
+```
+然後執行：
 ```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+bundle install
+```
+或是直接安裝：
+```bash
+gem install file_annotate
 ```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+## Usage 使用說明
 
+✅ CLI 批次處理
+執行以下指令，會自動為專案中所有 .rb 檔案加上第一行檔案路徑註解：
 ```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+file_annotate add
 ```
 
-## Usage
+執行以下指令，會自動檢查專案中所有 .rb 檔案的第一行或第二行為檔案路徑註解時，給予刪除：
+```bash
+file_annotate remove
+```
 
-TODO: Write usage instructions here
+✅ RuboCop 規則檢查
+在你的專案 .rubocop.yml 檔案中加入：
+```yaml
+require:
+  - file_annotate/rubocop
 
-## Development
+FileAnnotate/FirstLineComment:
+  Enabled: true
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+然後執行 RuboCop：
+```bash
+rubocop
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+若需要自動修正缺少的檔案註解，請使用：
+```bash
+rubocop -A
+```
 
 ## Contributing
 
